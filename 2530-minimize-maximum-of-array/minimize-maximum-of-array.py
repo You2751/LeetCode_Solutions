@@ -2,7 +2,7 @@ class Solution:
     def minimizeArrayValue(self, nums: List[int]) -> int:
         def can_reduce(mid):
             carry = 0
-            for i in range(len(nums) - 1, 0 , -1):
+            for i in range(len(nums) - 1, 0, -1):
                 total = nums[i] + carry
                 if(total > mid):
                     carry = total - mid
