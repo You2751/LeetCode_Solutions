@@ -7,7 +7,7 @@ class Solution:
                 b -= 1
             elif(len(string) >= 2 and string[-1] == 'b' and string[-2] == 'b'):
                 string += 'a'
-                a -= 1
+                a -=1 
             elif(a > b):
                 string += 'a'
                 a -= 1
