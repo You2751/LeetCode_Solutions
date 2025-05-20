@@ -1,15 +1,15 @@
 class Solution:
     def countKConstraintSubstrings(self, s: str, k: int) -> int:
-        left = ones = zeros = result = 0
+        result = left = ones = zeros = 0
         for right in range(len(s)):
             if(s[right] == '1'):
                 ones += 1
-            else:
+            elif(s[right] == '0'):
                 zeros += 1
-            while(zeros > k and ones > k):
+            while(ones > k and zeros > k):
                 if(s[left] == '1'):
                     ones -= 1
-                else:
+                elif(s[left] == '0'):
                     zeros -= 1
                 left += 1
             result += right - left + 1
