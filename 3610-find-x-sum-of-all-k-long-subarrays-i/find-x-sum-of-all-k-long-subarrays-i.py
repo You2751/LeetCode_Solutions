@@ -3,24 +3,22 @@ class Solution:
         if(len(nums) < k):
             return []
         counter = Counter(nums[:k])
-        def calculate_sum(counter):
+        def get_total(counter):
+            total = 0
             heap = [(-freq, -val) for val, freq in counter.items()]
             heapq.heapify(heap)
-            total = 0
             for _ in range(x):
                 if not heap:
                     break
-                freq, val = heapq.heappop(heap)
-                freq, val = -freq, -val
-                total += (freq * val)
+                (freq, val) = heapq.heappop(heap)
+                total += freq * val
             return total
-        result = [calculate_sum(counter)]
+        result = [get_total(counter)]
         for i in range(1, len(nums) - k + 1):
-            out_val = nums[i - 1]
-            counter[out_val] -= 1
-            if(counter[out_val] <= 0):
-                del counter[out_val]
-            in_val = nums[i + k - 1]
-            counter[in_val] += 1
-            result.append(calculate_sum(counter))
+            out = nums[i - 1]
+            counter[out] -= 1
+            if(counter[out] <= 0):
+                del counter[out]
+            counter[nums[i + k - 1]] += 1
+            result.append(get_total(counter))
         return result
