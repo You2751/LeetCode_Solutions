@@ -1,12 +1,17 @@
 class Solution:
     def countCompleteSubarrays(self, nums: List[int]) -> int:
-        result = 0
+        n = len(nums)
+        left = right = result = 0
         counter = Counter(nums)
+        sub_counter = defaultdict(int)
         unique_chars = len(counter)
-        for left in range(len(nums)):
-            unique_set = set()
-            for right in range(left, len(nums)):
-                unique_set.add(nums[right])
-                if(len(unique_set) == unique_chars):
-                    result += 1
+        while(right < len(nums)):
+            sub_counter[nums[right]] += 1
+            while(len(sub_counter) == unique_chars):
+                result += (n - right)
+                sub_counter[nums[left]] -= 1
+                if(sub_counter[nums[left]] == 0):
+                    del sub_counter[nums[left]]
+                left += 1
+            right += 1
         return result
