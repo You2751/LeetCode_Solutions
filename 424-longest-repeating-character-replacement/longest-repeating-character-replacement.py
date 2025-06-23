@@ -5,7 +5,8 @@ class Solution:
         for right, ch in enumerate(s):
             counter[ch] += 1
             max_freq = max(max_freq, counter[ch])
-            if(right - left + 1 > max_freq + k): 
+            while(right - left + 1 > max_freq + k): 
+                max_freq = max(counter.values())
                 counter[s[left]] -= 1
                 left += 1
             result = max(result, right - left + 1)
