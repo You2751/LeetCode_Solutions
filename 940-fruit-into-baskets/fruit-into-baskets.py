@@ -1,15 +1,15 @@
 class Solution:
     def totalFruit(self, fruits: List[int]) -> int:
-        fruits_basket = defaultdict(int)
-        running_fruits = max_fruits = left = 0
-        for right, fruit in enumerate(fruits):
-            fruits_basket[fruit] += 1
+        fruit_basket = defaultdict(int)
+        left = running_fruits = result = 0
+        for fruit in fruits:
+            fruit_basket[fruit] += 1
             running_fruits += 1
-            if(len(fruits_basket) > 2):
-                fruits_basket[fruits[left]] -= 1
-                if(fruits_basket[fruits[left]] == 0):
-                    del fruits_basket[fruits[left]]
-                left += 1
+            while(len(fruit_basket) > 2):
+                fruit_basket[fruits[left]] -= 1
                 running_fruits -= 1
-            max_fruits = max(max_fruits, running_fruits)
-        return max_fruits
+                if(fruit_basket[fruits[left]] == 0):
+                    del fruit_basket[fruits[left]]
+                left += 1
+            result = max(result, sum(fruit_basket.values()))
+        return result
