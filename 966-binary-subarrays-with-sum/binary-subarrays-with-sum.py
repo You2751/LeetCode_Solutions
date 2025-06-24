@@ -3,7 +3,7 @@ class Solution:
         def at_most(target):
             if(target < 0):
                 return 0
-            left = curr_sum = result = 0
+            curr_sum = left = result = 0
             for right, num in enumerate(nums):
                 curr_sum += num
                 while(curr_sum > target):
