@@ -11,5 +11,5 @@ class Solution:
                 if(fruit_basket[fruits[left]] == 0):
                     del fruit_basket[fruits[left]]
                 left += 1
-            result = max(result, sum(fruit_basket.values()))
+            result = max(result, running_fruits)
         return result
