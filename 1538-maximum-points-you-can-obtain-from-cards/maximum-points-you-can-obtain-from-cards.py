@@ -5,7 +5,7 @@ class Solution:
         right_sum = 0
         for idx in range(k - 1, -1, -1):
             right_idx -= 1
-            left_sum -= cardPoints[idx]
             right_sum += cardPoints[right_idx]
+            left_sum -= cardPoints[idx]
             result = max(result, left_sum + right_sum)
         return result
