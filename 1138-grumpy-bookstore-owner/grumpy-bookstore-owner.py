@@ -1,15 +1,13 @@
 class Solution:
     def maxSatisfied(self, customers: List[int], grumpy: List[int], minutes: int) -> int:
-        total_unsatsified_cust = sum(cust * grum for cust, grum in zip(customers, grumpy))
-        temp_cust = 0
-        for i in range(minutes):
-            temp_cust += customers[i] * grumpy[i]
-        total_cust = temp_cust
-        for i in range(minutes, len(customers)):
-            temp_cust += customers[i] * grumpy[i]
-            temp_cust -= customers[i - minutes] * grumpy[i - minutes]
-            total_cust = max(total_cust, temp_cust)
-        for i in range(len(customers)):
-            if(not grumpy[i]):
-                total_cust += customers[i]
-        return total_cust
+        window = minutes
+        total_satisfied = max_extra = extra_satisfied = 0
+        for right, customer in enumerate(customers):
+            if(not grumpy[right]):
+                total_satisfied += customer
+            else:
+                extra_satisfied += customer
+            if(right >= window and grumpy[right - window] == 1):
+                extra_satisfied -= customers[right - window]
+            max_extra = max(max_extra, extra_satisfied)
+        return total_satisfied + max_extra
