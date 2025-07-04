@@ -1,6 +1,6 @@
 class Solution:
     def longestNiceSubarray(self, nums: List[int]) -> int:
-        left = bit_mask = result = 0
+        result = left = bit_mask = 0
         for right, num in enumerate(nums):
             while(bit_mask & num):
                 bit_mask ^= nums[left]
