@@ -1,16 +1,15 @@
 class Solution:
     def shortestBeautifulSubstring(self, s: str, k: int) -> str:
-        left = right = count_ones = 0
-        shortest_subtring = ''
-        while(right < len(s)):
-            count_ones += s[right] == '1'
-            while(count_ones > k or (left < right and s[left] == '0')):
-                count_ones -= s[left] == '1'
+        left = count_ones = 0
+        result = None
+        for right, char in enumerate(s):
+            if(char == '1'):
+                count_ones += 1
+            while(count_ones >= k):
+                curr_string = s[left:right + 1]
+                if(result is None or len(curr_string) < len(result) or (len(curr_string) == len(result) and curr_string < result)):
+                    result = curr_string
+                if(s[left] == '1'):
+                    count_ones -= 1
                 left += 1
-            right += 1
-            while(count_ones == k and
-            (not shortest_subtring) or
-            (right - left < len(shortest_subtring)) or
-            (right - left == len(shortest_subtring) and s[left:right] < shortest_subtring)):
-                shortest_subtring = s[left:right]
-        return shortest_subtring
+        return result if result is not None else ""
