@@ -1,16 +1,12 @@
 class Solution:
     def minSwaps(self, nums: List[int]) -> int:
-        swaps_one = self.min_swaps(nums, 1)
-        return swaps_one
-    def min_swaps(self, nums, target):
-        total_count = nums.count(target)
-        if(total_count in [0, len(nums)]):
+        ones_count = nums.count(1)
+        if(ones_count in [0, len(nums) - 1]):
             return 0
-        extended = nums + nums[:total_count - 1]
-        max_in_window = current = sum(extended[:total_count])
-        for i in range(total_count, len(extended)):
-            current += extended[i]
-            current -= extended[i - total_count]
-            max_in_window = max(current, max_in_window)
-        return total_count - max_in_window
-        
+        nums_extended = nums + nums[:ones_count]
+        curr_ones = max_ones = sum(nums_extended[:ones_count])
+        for i in range(ones_count, len(nums_extended)):
+            curr_ones += nums_extended[i]
+            curr_ones -= nums_extended[i - ones_count]
+            max_ones = max(max_ones, curr_ones)
+        return ones_count - max_ones
