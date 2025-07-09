@@ -6,10 +6,11 @@ class Solution:
             if(char == '1'):
                 count_ones += 1
             while(count_ones >= k):
-                curr_string = s[left:right + 1]
-                if(result is None or len(curr_string) < len(result) or (len(curr_string) == len(result) and curr_string < result)):
-                    result = curr_string
+                string = s[left:right + 1]
+                if(result is None or len(string) < len(result) or (len(result) == len(string) and string < result)):
+                    result = string
                 if(s[left] == '1'):
                     count_ones -= 1
+                
                 left += 1
         return result if result is not None else ""
