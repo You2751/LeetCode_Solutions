@@ -2,23 +2,22 @@ class Solution:
     def countOfSubstrings(self, word: str, k: int) -> int:
         def is_vowel(char):
             return char in {'a', 'e', 'i', 'o', 'u'}
-        def substrings(k):
+        def check(k):
             counter = defaultdict(int)
-            left = constants = result = 0
+            left = result = constants = 0
             for right, char in enumerate(word):
                 if(is_vowel(char)):
                     counter[char] += 1
                 else:
                     constants += 1
-                while(constants >= k and len(counter) == 5):
-                    left_char = word[left]
-                    left += 1
-                    if(is_vowel(left_char)):
-                        counter[left_char] -= 1
-                        if(counter[left_char] == 0):
-                            del counter[left_char]
+                while(len(counter) == 5 and constants >= k):
+                    result += len(word) - right
+                    if(is_vowel(word[left])):
+                        counter[word[left]] -= 1
+                        if(counter[word[left]] == 0):
+                            del counter[word[left]]
                     else:
                         constants -= 1
-                result += left
+                    left += 1
             return result
-        return substrings(k) - substrings(k + 1) 
+        return check(k) - check(k + 1)
