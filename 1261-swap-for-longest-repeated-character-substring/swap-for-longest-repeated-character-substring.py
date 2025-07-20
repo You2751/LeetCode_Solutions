@@ -1,6 +1,6 @@
 class Solution:
     def maxRepOpt1(self, text: str) -> int:
-        res = 0
+        result = 0
         counter = Counter(text)
         for char in set(text):
             left = diff = 0
@@ -11,5 +11,5 @@ class Solution:
                     if(text[left] != char):
                         diff -= 1
                     left += 1
-                res = max(res, min(right - left + 1, counter[char]))
-        return res
+                result = max(result, min(right - left + 1, counter[char]))
+        return result
