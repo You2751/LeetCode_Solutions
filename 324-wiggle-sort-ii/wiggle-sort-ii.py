@@ -3,17 +3,17 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        n = len(nums)
         sorted_nums = sorted(nums)
-        median = (len(nums) + 1) // 2
+        median = (n + 1) // 2
         small_half = sorted_nums[:median][::-1]
         big_half = sorted_nums[median:][::-1]
-        even, odd = 0, 1
-        ptr1 = ptr2 = 0
-        while(ptr1 < len(small_half)):
-            nums[even] = small_half[ptr1]
-            even += 2
-            ptr1 += 1
-        while(ptr2 < len(big_half)):
-            nums[odd] = big_half[ptr2]
-            odd += 2
-            ptr2 += 1
+        nums = self.insert_val(0, nums, small_half)
+        nums = self.insert_val(1, nums, big_half)
+    def insert_val(self, array_idx, array, even_odd_array):
+        ptr = 0
+        while(ptr < len(even_odd_array)):
+            array[array_idx] = even_odd_array[ptr]
+            array_idx += 2
+            ptr += 1
+        return array
