@@ -2,7 +2,7 @@ class Solution:
     def circularArrayLoop(self, nums: List[int]) -> bool:
         n = len(nums)
         def next_index(index):
-            return (index + nums[index]) % len(nums)
+            return (index + nums[index]) % n
         for i in range(len(nums)):
             if(nums[i] == 0):
                 continue
