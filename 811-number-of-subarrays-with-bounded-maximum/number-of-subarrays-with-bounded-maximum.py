@@ -5,7 +5,7 @@ class Solution:
             if(left <= num <= right):
                 count = end - start + 1
             elif(num > right):
-                start = end + 1
                 count = 0
+                start = end + 1
             result += count
         return result
