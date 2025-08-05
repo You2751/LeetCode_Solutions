@@ -3,8 +3,8 @@ class Solution:
         requests = 0
         counter = Counter(ages)
         sorted_counter = sorted(counter)
-        for ageA in sorted_counter:
-            for ageB in sorted_counter:
+        for ageA in counter.keys():
+            for ageB in counter.keys():
                 if(ageB <= (ageA * 0.5) + 7 or ageB > ageA or ageB > 100 and ageA < 100):
                     continue
                 requests += counter[ageA] * counter[ageB]
