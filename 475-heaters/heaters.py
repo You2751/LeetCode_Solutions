@@ -3,12 +3,13 @@ class Solution:
         houses.sort()
         heaters.sort()
         def can_heat(radius):
-            house_idx = heater_idx = 0
+            heater_idx = house_idx = 0
             while(house_idx < len(houses)):
                 if(heater_idx >= len(heaters)):
                     return False
                 min_range = heaters[heater_idx] - radius
                 max_range = heaters[heater_idx] + radius
+
                 if(houses[house_idx] < min_range):
                     return False
                 if(houses[house_idx] > max_range):
