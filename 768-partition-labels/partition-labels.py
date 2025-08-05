@@ -4,7 +4,9 @@ class Solution:
         dic = defaultdict(int)
         for idx, char in enumerate(s):
             dic[char] = idx
+
         left = right = 0
+
         for idx, char in enumerate(s):
             right = max(right, dic[char])
             if(idx == right):
