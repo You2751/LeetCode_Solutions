@@ -1,22 +1,22 @@
 class Solution:
     def findRadius(self, houses: List[int], heaters: List[int]) -> int:
-        def bisect(heaters, target):
-            left, right = 0, len(heaters) - 1
+        radius = 0
+        heaters.sort()
+        def find_radius(heaters, house):
+            left, right = 0, len(heaters)
             while(left < right):
                 mid = (left + right) // 2
-                if(heaters[mid] >= target):
+                if(heaters[mid] >= house):
                     right = mid
                 else:
                     left = mid + 1
             return left
-        heaters.sort()
-        radius = 0
-        for house in houses:
-            idx = bisect(heaters, house)
-            left_distance = float('inf') if idx == 0 else abs(heaters[idx - 1] - house)
-            right_distance = float('inf') if idx == len(heaters) else abs(heaters[idx] - house)
-            distance = min(left_distance, right_distance)
-            radius = max(radius, distance)
         
+        for house in houses:
+            idx = find_radius(heaters, house)
+            left_radius = float('inf') if idx == 0 else house - heaters[idx - 1]
+            right_radius = float('inf') if idx == len(heaters) else heaters[idx] - house
+
+            distance = min(left_radius, right_radius)
+            radius = max(radius, distance)
         return radius
-                
