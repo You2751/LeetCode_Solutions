@@ -5,8 +5,8 @@ class Solution:
         for idx, height in enumerate(heights):
             start = idx
             while(stack and stack[-1][-1] >= height):
-                index, height_bigger = stack.pop()
-                max_area = max(max_area, height_bigger * (idx - index))
+                index, height_taller = stack.pop()
+                max_area = max(max_area, height_taller * (idx - index))
                 start = index
             stack.append([start, height])
         
