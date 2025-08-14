@@ -5,11 +5,12 @@ class Solution:
         for idx, height in enumerate(heights):
             start = idx
             while(stack and stack[-1][-1] >= height):
-                index, height_right = stack.pop()
-                max_area = max(max_area, height_right * (idx - index))
+                index, height_bigger = stack.pop()
+                max_area = max(max_area, height_bigger * (idx - index))
                 start = index
             stack.append([start, height])
         
-        for i, height in stack:
-            max_area = max(max_area, height * (len(heights) - i))
+        for idx, height in stack:
+            max_area = max(max_area, height * (len(heights) - idx))
+        
         return max_area
