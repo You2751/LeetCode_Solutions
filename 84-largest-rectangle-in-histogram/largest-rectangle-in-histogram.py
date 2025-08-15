@@ -4,13 +4,12 @@ class Solution:
         max_area = float('-inf')
         for idx, height in enumerate(heights):
             start = idx
-            while(stack and stack[-1][-1] >= height):
-                index, height_taller = stack.pop()
-                max_area = max(max_area, height_taller * (idx - index))
+            while(stack and stack[-1][1] >= height):
+                index, height_larger = stack.pop()
+                max_area = max(max_area, height_larger * (idx - index))
                 start = index
             stack.append([start, height])
         
         for idx, height in stack:
             max_area = max(max_area, height * (len(heights) - idx))
-        
         return max_area
