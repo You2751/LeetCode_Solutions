@@ -7,5 +7,6 @@ class Solution:
         for right in range(window, len(haystack)):
             string = string[1:] + haystack[right]
             if(string == needle):
+                print(haystack[right - window + 1])
                 return right - window + 1
         return -1
