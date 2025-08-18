@@ -1,11 +1,13 @@
 class Solution:
     def findMaxK(self, nums: List[int]) -> int:
-        check = set()
-        result = float('-inf')
-        for val in nums:
-            if(val > 0 and (-1 * val) in check):
-                result = max(result, abs(val))
-            if(val < 0 and (-1 * val) in check):
-                result = max(result, abs(val))
-            check.add(val)
-        return result if result != float('-inf') else -1
+        nums.sort()
+        left, right = 0, len(nums) - 1
+        while(left < right):
+            check = nums[left] + nums[right]
+            if(check == 0):
+                return nums[right]
+            elif(check > 0):
+                right -= 1
+            else:
+                left += 1
+        return -1
