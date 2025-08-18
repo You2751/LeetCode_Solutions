@@ -1,9 +1,11 @@
 class Solution:
     def findKDistantIndices(self, nums: List[int], key: int, k: int) -> List[int]:
+        left = 0
         result = []
-        for i in range(len(nums)):
-            for j in range(len(nums)):
-                if(nums[j] == key and abs(i - j) <= k):
-                    result.append(i)
-                    break
+        for right, val in enumerate(nums):
+            if(val == key):
+                left = max(left, right - k)
+                while(left <= right + k and left < len(nums)):
+                    result.append(left)
+                    left += 1
         return result
