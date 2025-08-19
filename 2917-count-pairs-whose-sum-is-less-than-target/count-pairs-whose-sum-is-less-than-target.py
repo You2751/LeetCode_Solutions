@@ -4,8 +4,8 @@ class Solution:
         nums.sort()
         left, right = 0, len(nums) - 1
         while(left < right):
-            summation = nums[left] + nums[right]
-            if(summation < target):
+            check = nums[left] + nums[right]
+            if(check < target):
                 result += right - left
                 left += 1
             else:
