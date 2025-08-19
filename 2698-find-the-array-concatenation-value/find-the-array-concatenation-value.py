@@ -12,8 +12,6 @@ class Solution:
         result = 0
         while(left <= right):
             if(left != right):
-                print(nums[left])
-                print(zeros(nums[right]))
                 result += (nums[left] * (10 ** zeros(nums[right]))) + nums[right]
                 print(result)
             else:
