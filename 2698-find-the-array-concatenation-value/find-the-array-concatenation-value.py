@@ -1,17 +1,24 @@
 class Solution:
     def findTheArrayConcVal(self, nums: List[int]) -> int:
-        number = 0
+        def zeros(num):
+            if(num == 0):
+                return 1
+            zeros = 0
+            while(num):
+                num //= 10
+                zeros += 1
+            return zeros
         left, right = 0, len(nums) - 1
+        result = 0
         while(left <= right):
             if(left != right):
-                str_num = str(nums[left]) + str(nums[right])
-                print(str_num)
-                number += int(str_num)
+                print(nums[left])
+                print(zeros(nums[right]))
+                result += (nums[left] * (10 ** zeros(nums[right]))) + nums[right]
+                print(result)
             else:
-                str_num = str(nums[left])
-                number += int(str_num)
-            print(number)
+                result += nums[left]
             left += 1
             right -= 1
-        return number
-7
+        return result 
+            
