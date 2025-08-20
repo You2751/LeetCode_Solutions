@@ -1,40 +1,29 @@
 class Solution:
     def incremovableSubarrayCount(self, nums: List[int]) -> int:
+        result = 0
         n = len(nums)
-        if n == 0:
-            return 0                       # safety, though n ≥ 1 on LeetCode
+        if(n == 0):
+            return 0
+        prefix_idx, suffix_idx = 0, n - 1
 
-        # 1) longest strictly-increasing prefix
-        prefix_end = 1
-        while prefix_end < n and nums[prefix_end] > nums[prefix_end - 1]:
-            prefix_end += 1
+        while(prefix_idx + 1 < n and nums[prefix_idx] < nums[prefix_idx + 1]):
+            prefix_idx += 1
+        
+        if(prefix_idx == n - 1):
+            return (n*(n + 1)) // 2
+        
+        while(suffix_idx > 0 and nums[suffix_idx] > nums[suffix_idx - 1]):
+            suffix_idx -= 1
+        
+        result += prefix_idx + 1
+        result += n - suffix_idx + 1
 
-        # 2) already strictly increasing?  all non-empty subarrays work
-        if prefix_end == n:
-            return n * (n + 1) // 2
-
-        # 3) longest strictly-increasing suffix
-        suffix_start = n - 1
-        while suffix_start > 0 and nums[suffix_start] > nums[suffix_start - 1]:
-            suffix_start -= 1
-
-        ans = 0
-
-        # 4a) remove-suffix cases  ── cut from s to end,  s ∈ [1 .. prefix_end]
-        ans += prefix_end                       #  exactly prefix_end choices
-
-        # 4b) remove-prefix cases  ── cut 0..p,   p ∈ [suffix_start-1 .. n-1]
-        ans += n - suffix_start + 1             #  +1 counts “delete whole array”
-
-        # 4c) remove-middle cases:     keep a prefix ending at i (0 ≤ i < prefix_end)
-        #                              keep a suffix starting at j (suffix_start ≤ j < n)
-        #                              and need nums[i] < nums[j]
         i = 0
-        j = suffix_start
-        while i < prefix_end:
-            while j < n and nums[j] <= nums[i]:
-                j += 1
-            ans += n - j                        # every k ≥ j is valid for this i
-            i += 1
+        j = suffix_idx
 
-        return ans
+        while(i <= prefix_idx):
+            while(j < n and nums[i] >= nums[j]):
+                j += 1
+            result += n - j
+            i += 1
+        return result
