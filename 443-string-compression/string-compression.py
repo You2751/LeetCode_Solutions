@@ -5,8 +5,8 @@ class Solution:
             char = chars[right]
             count = 0
             while(right < len(chars) and chars[right] == char):
-                right += 1
                 count += 1
+                right += 1
             chars[left] = char
             left += 1
             if(count > 1):
