@@ -4,5 +4,4 @@ class Solution:
             idx = abs(num)
             if(nums[idx] < 0):
                 return idx
-            nums[idx] *= -1
-            
+            nums[idx] = -nums[idx]
