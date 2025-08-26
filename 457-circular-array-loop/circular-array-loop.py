@@ -13,11 +13,6 @@ class Solution:
             slow = get_next(i)
             fast = get_next(get_next(i))
 
-            # immediate self-loop check
-            if slow == i:
-                continue
-
-            # cycle detection with full sign‐checks
             while (
                 nums[slow] * nums[fast] > 0 and
                 nums[slow] * nums[get_next(fast)] > 0):
@@ -30,7 +25,6 @@ class Solution:
                 slow = get_next(slow)
                 fast = get_next(get_next(fast))
 
-            # cleanup the dead path
             j = i
             while nums[j] * nums[get_next(j)] > 0:
                 nxt = get_next(j)
