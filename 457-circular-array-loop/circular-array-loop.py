@@ -1,25 +1,40 @@
 class Solution:
     def circularArrayLoop(self, nums: List[int]) -> bool:
         n = len(nums)
-        def get_next_index(index):
-            return (index + nums[index]) % n
-        for i in range(len(nums)):
-            if(nums[i] == 0):
-                continue
-            slow = i
-            fast = get_next_index(i)
-            while(nums[slow] * nums[fast] > 0 and nums[slow] * nums[get_next_index(fast)] > 0):
-                if(slow == fast):
-                    if(slow == get_next_index(slow)):
-                        break
-                    else:
-                        return True
-                slow = get_next_index(slow)
-                fast = get_next_index(get_next_index(fast))
 
-            index = i
-            while(nums[index] * nums[get_next_index(index)] > 0):
-                next_index = get_next_index(index)
-                nums[index] = 0
-                index = next_index
+        def get_next(i: int) -> int:
+            return (i + nums[i]) % n
+
+        for i in range(n):
+            if nums[i] == 0:
+                continue
+
+            # seed tortoise & hare
+            slow = get_next(i)
+            fast = get_next(get_next(i))
+
+            # immediate self-loop check
+            if slow == i:
+                continue
+
+            # cycle detection with full sign‐checks
+            while (
+                nums[slow] * nums[fast] > 0 and
+                nums[slow] * nums[get_next(fast)] > 0):
+                if slow == fast:
+                    if slow != get_next(slow):
+                        return True
+                    else:
+                        break
+
+                slow = get_next(slow)
+                fast = get_next(get_next(fast))
+
+            # cleanup the dead path
+            j = i
+            while nums[j] * nums[get_next(j)] > 0:
+                nxt = get_next(j)
+                nums[j] = 0
+                j = nxt
+
         return False
