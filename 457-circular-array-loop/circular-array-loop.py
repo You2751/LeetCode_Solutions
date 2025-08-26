@@ -1,23 +1,25 @@
 class Solution:
     def circularArrayLoop(self, nums: List[int]) -> bool:
         n = len(nums)
-        def next_index(index):
+        def get_next_index(index):
             return (index + nums[index]) % n
         for i in range(len(nums)):
             if(nums[i] == 0):
                 continue
-            slow, fast = i, next_index(i)
-            while(nums[slow] * nums[fast] > 0 and nums[slow] * nums[next_index(fast)] > 0):
+            slow = i
+            fast = get_next_index(i)
+            while(nums[slow] * nums[fast] > 0 and nums[slow] * nums[get_next_index(fast)] > 0):
                 if(slow == fast):
-                    if(slow != next_index(slow)):
-                        return True
-                    else:
+                    if(slow == get_next_index(slow)):
                         break
-                slow = next_index(slow)
-                fast = next_index(next_index(fast))
+                    else:
+                        return True
+                slow = get_next_index(slow)
+                fast = get_next_index(get_next_index(fast))
+
             index = i
-            while(nums[index] * nums[next_index(index)] > 0):
-                next_jump = next_index(index)
+            while(nums[index] * nums[get_next_index(index)] > 0):
+                next_index = get_next_index(index)
                 nums[index] = 0
-                index = next_jump
+                index = next_index
         return False
