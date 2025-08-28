@@ -1,1 +1,1 @@
-<h2>sum-of-square-numbers Notes</h2><hr>[ Time taken: 1 d 6 hrs 41 m 25 s ]
+<h2>sum-of-square-numbers Notes</h2><hr>[ Time taken: 2 d 2 hrs 49 m 18 s ]
