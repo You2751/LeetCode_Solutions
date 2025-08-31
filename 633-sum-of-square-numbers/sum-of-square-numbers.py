@@ -1,8 +1,6 @@
 class Solution:
     def judgeSquareSum(self, c: int) -> bool:
-        left, right = 1, int(sqrt(c))
-        if(right * right == c):
-            return True
+        left, right = 0, int(sqrt(c))
         while(left <= right):
             check_num = left**2 + right**2
             if(check_num == c):
