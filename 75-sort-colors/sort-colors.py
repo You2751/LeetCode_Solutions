@@ -7,15 +7,12 @@ class Solution:
         right = len(nums) - 1
         while(mid <= right):
             if(nums[mid] == 0):
-                nums[left], nums[mid] = nums[mid], nums[left]
-                left += 1
+                nums[mid], nums[left] = nums[left], nums[mid]
                 mid += 1
-                print(nums)
+                left += 1
             elif(nums[mid] == 2):
                 nums[mid], nums[right] = nums[right], nums[mid]
                 right -= 1
-                print(nums)
             else:
-                print(nums)
                 mid += 1
         
