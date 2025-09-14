@@ -1,34 +1,24 @@
 class Solution:
     def circularArrayLoop(self, nums: List[int]) -> bool:
         n = len(nums)
-
-        def get_next(i: int) -> int:
-            return (i + nums[i]) % n
-
+        def next_idx(idx):
+            return (idx + nums[idx]) % n
         for i in range(n):
-            if nums[i] == 0:
+            if(nums[i] == 0):
                 continue
-
-            # seed tortoise & hare
-            slow = get_next(i)
-            fast = get_next(get_next(i))
-
-            while (
-                nums[slow] * nums[fast] > 0 and
-                nums[slow] * nums[get_next(fast)] > 0):
-                if slow == fast:
-                    if slow != get_next(slow):
+            slow = next_idx(i)
+            fast = next_idx(next_idx(i))
+            while(nums[slow] * nums[fast] > 0 and nums[slow] * nums[next_idx(fast)] > 0):
+                if(slow == fast):
+                    if(slow != next_idx(slow)):
                         return True
                     else:
                         break
-
-                slow = get_next(slow)
-                fast = get_next(get_next(fast))
-
-            j = i
-            while nums[j] * nums[get_next(j)] > 0:
-                nxt = get_next(j)
-                nums[j] = 0
-                j = nxt
-
+                slow = next_idx(slow)
+                fast = next_idx(next_idx(fast))
+            index = i
+            while(nums[index] * nums[next_idx(index)] > 0):
+                next_index = next_idx(index)
+                nums[index] = 0
+                index = next_index
         return False
