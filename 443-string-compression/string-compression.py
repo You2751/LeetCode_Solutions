@@ -3,15 +3,15 @@ class Solution:
         left = right = 0
         n = len(chars)
         while(right < n):
-            char = chars[right]
             count = 0
+            char = chars[right]
             while(right < n and chars[right] == char):
-                count += 1
                 right += 1
+                count += 1
             chars[left] = char
             left += 1
             if(count > 1):
-                for ch in str(count):
-                    chars[left] = ch
+                for num in str(count):
+                    chars[left] = num
                     left += 1
         return left
