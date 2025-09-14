@@ -12,8 +12,7 @@ class Solution:
                 if(slow == fast):
                     if(slow != next_idx(slow)):
                         return True
-                    else:
-                        break
+                    break
                 slow = next_idx(slow)
                 fast = next_idx(next_idx(fast))
             index = i
