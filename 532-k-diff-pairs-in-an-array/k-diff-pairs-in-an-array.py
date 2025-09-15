@@ -1,39 +1,26 @@
-from typing import List
-
 class Solution:
     def findPairs(self, nums: List[int], k: int) -> int:
-        if k < 0:
-            return 0  # absolute difference can't be negative
-
+        if(k < 0):
+            return 0
+        result = 0
         nums.sort()
         n = len(nums)
         left, right = 0, 1
-        count = 0
-
-        while right < n:
-            if left == right:
+        while(right < n):
+            if(left == right):
                 right += 1
-                continue
-
+                continue 
             diff = nums[right] - nums[left]
-
-            if diff < k:
-                # Need a larger difference → move right forward
+            if(diff < k):
                 right += 1
-            elif diff > k:
-                # Difference too big → move left forward
+            elif(diff > k):
                 left += 1
             else:
-                # Found a pair with difference k
-                count += 1
+                result += 1
                 left += 1
-
-                # Skip duplicates on the left so each pair value is counted once
-                while left < n and nums[left] == nums[left - 1]:
+                while(left < right and nums[left] == nums[left - 1]):
                     left += 1
+                while(right < n and nums[right] == nums[right - 1]):
+                    right += 1
+        return result
 
-                # Ensure right stays ahead
-                if left >= right:
-                    right = left + 1
-
-        return count
