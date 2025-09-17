@@ -1,14 +1,23 @@
 class Solution:
     def findLongestWord(self, s: str, dictionary: List[str]) -> str:
+        new_dictionary = sorted(dictionary, key = lambda x:(-len(x), x))
+        for word in new_dictionary:
+            condition_one = self.is_subsequence(s, word)
+            if(condition_one):
+                return word
+        return ""
+    """
+    def findLongestWord(self, s: str, dictionary: List[str]) -> str:
+        new_dictionary = sorted(dictionary, key = lambda x:(-len(x), x))
         result = ""
-        for word in dictionary:
+        for word in new_dictionary:
             condition_one = self.is_subsequence(s, word)
             condition_two = len(word) > len(result)
             condition_three = len(word) == len(result) and word < result
             if(condition_one and (condition_two or condition_three)):
                 result = word
         return result
-
+    """
 
 
     def is_subsequence(self, s, dic_word):
