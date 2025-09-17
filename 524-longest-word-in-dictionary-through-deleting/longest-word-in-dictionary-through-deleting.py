@@ -8,12 +8,15 @@ class Solution:
             if(condition_one and (condition_two or condition_three)):
                 result = word
         return result
-    def is_subsequence(self, s, word):
+
+
+
+    def is_subsequence(self, s, dic_word):
+        n = len(dic_word)
         ptr1 = ptr2 = 0
-        while(ptr1 < len(s) and ptr2 < len(word)):
-            if(s[ptr1] == word[ptr2]):
-                ptr1 += 1
+        while(ptr1 < len(s) and ptr2 < len(dic_word)):
+            if(s[ptr1] == dic_word[ptr2]):
                 ptr2 += 1
-            else:
-                ptr1 += 1
-        return ptr2 == len(word)
+            ptr1 += 1
+
+        return ptr2 == n
