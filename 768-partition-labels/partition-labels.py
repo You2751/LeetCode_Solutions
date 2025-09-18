@@ -2,14 +2,12 @@ class Solution:
     def partitionLabels(self, s: str) -> List[int]:
         result = []
         dic = defaultdict(int)
-        for idx, char in enumerate(s):
-            dic[char] = idx
-
-        left = right = 0
-
-        for idx, char in enumerate(s):
-            right = max(right, dic[char])
-            if(idx == right):
-                result.append(right - left + 1)
-                left = right + 1
+        for idx, c in enumerate(s):
+            dic[c] = idx
+        start = end = 0
+        for i in range(len(s)):
+            end = max(end, dic[s[i]])
+            if(i == end):
+                result.append(end - start + 1)
+                start = i + 1
         return result
