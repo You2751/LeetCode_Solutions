@@ -1,15 +1,16 @@
 class Solution:
     def nextGreaterElement(self, n: int) -> int:
-        string = list(str(n))
-        idx1 = len(string) - 1
-        while(idx1 > 0 and string[idx1 - 1] >= string[idx1]):
-            idx1 -= 1
-        if(idx1 == 0):
+        nums = list(str(n))
+        length = len(nums)
+        right = length - 1
+        while(right - 1 >= 0 and nums[right - 1] >= nums[right]):
+            right -= 1
+        if(right == 0):
             return -1
-        idx2 = len(string) - 1
-        while(idx2 > idx1 - 1 and string[idx1 - 1] >= string[idx2]):
-            idx2 -= 1
-        string[idx1 - 1], string[idx2] = string[idx2], string[idx1 - 1]
-        string[idx1:] = string[idx1:][::-1]
-        result = int("".join(string))
+        check_idx =  length - 1
+        while(check_idx > right and nums[right - 1] >= nums[check_idx]):
+            check_idx -= 1
+        nums[right - 1], nums[check_idx] = nums[check_idx], nums[right - 1]
+        nums[right:] = nums[right:][::-1]
+        result = int("".join(nums))
         return result if result <= 2**31 - 1 else -1
