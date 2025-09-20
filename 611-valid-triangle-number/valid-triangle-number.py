@@ -3,7 +3,7 @@ class Solution:
         result = 0
         nums.sort()
         
-        for right in range(len(nums) - 1, -1, -1):
+        for right in range(len(nums) - 1, -1, -1): 
             left, mid = 0, right - 1
             while(left < mid):
                 check_sum = nums[left] + nums[mid]
