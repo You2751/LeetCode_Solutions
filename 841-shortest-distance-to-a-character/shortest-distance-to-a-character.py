@@ -1,9 +1,9 @@
 class Solution:
     def shortestToChar(self, s: str, c: str) -> List[int]:
-        result = [len(s)] * len(s)
         prev = len(s)
-        for idx, char in enumerate(s):
-            if(char == c):
+        result = [0] * len(s)
+        for idx, ch in enumerate(s):
+            if(ch == c):
                 prev = idx
             result[idx] = abs(idx - prev)
         for idx in range(len(s) - 1, -1, -1):
