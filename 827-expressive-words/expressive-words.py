@@ -5,16 +5,17 @@ class Solution:
             while(ptr1 < len(original) and ptr2 < len(word)):
                 if(original[ptr1] != word[ptr2]):
                     return False
-                original_ptr1 = ptr1
-                while(ptr1 < len(original) and original[ptr1] == original[original_ptr1]):
+                original_ptr = ptr1
+                while(ptr1 < len(original) and original[ptr1] == original[original_ptr]):
                     ptr1 += 1
-                stretch_original = ptr1 - original_ptr1
-                word_ptr2 = ptr2
-                while(ptr2 < len(word) and word[ptr2] == word[word_ptr2]):
-                    ptr2 +=1 
-                stretch_word = ptr2 - word_ptr2
+                original_stretch = ptr1 - original_ptr
 
-                if((stretch_word > stretch_original) or (stretch_original < 3 and stretch_original != stretch_word)):
+                word_ptr = ptr2
+                while(ptr2 < len(word) and word[ptr2] == word[word_ptr]):
+                    ptr2 += 1
+
+                word_stretch = ptr2 - word_ptr
+                if(original_stretch < word_stretch or (original_stretch == 2 and word_stretch < original_stretch)):
                     return False
             return ptr1 == len(original) and ptr2 == len(word)
         return sum(can_stretch(s, word) for word in words)
