@@ -1,18 +1,29 @@
 class Solution:
     def pushDominoes(self, dominoes: str) -> str:
+        #case 1 --> L..L --> fill left
+        #case 2 --> R..R --> Fill Right
+        #Case 3 --> R..L --> Fill between them till middle
+        #Case 4 --> L..R --> Do nothing
+        #Case 5 --> . --> Do nothing
+
+        #Edge case 1 --> ....L, start with Left 
+        #Edge Case 2 --> R...., end with Right 
+
+        arr = list(dominoes)
         prev_idx = -1
         prev_char = 'L'
-        arr = list(dominoes)
-        n = len(arr)
-
+        n = len(dominoes)
         for i in range(n + 1):
-            curr_char = 'R' if i == n else dominoes[i]
+            if(i == n):
+                curr_char = 'R'
+            else:
+                curr_char = arr[i]
             if(curr_char == '.'):
                 continue
-            if(prev_char == curr_char):
+            if(curr_char == prev_char):
                 for j in range(prev_idx + 1, i):
                     arr[j] = curr_char
-            elif(prev_char == 'R' and curr_char == 'L'):
+            elif(curr_char == 'L' and prev_char == 'R'):
                 left = prev_idx + 1
                 right = i - 1
                 while(left < right):
@@ -21,5 +32,6 @@ class Solution:
                     left += 1
                     right -= 1
             prev_idx, prev_char = i, curr_char
-        
+
         return ''.join(arr)
+        
