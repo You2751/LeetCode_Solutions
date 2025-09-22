@@ -1,14 +1,13 @@
 class Solution:
     def numFriendRequests(self, ages: List[int]) -> int:
-        requests = 0
+        result = 0
         counter = Counter(ages)
-        sorted_counter = sorted(counter)
-        for ageA in counter.keys():
-            for ageB in counter.keys():
-                if(ageB <= (ageA * 0.5) + 7 or ageB > ageA or ageB > 100 and ageA < 100):
+        for ageA in counter:
+            for ageB in counter:
+                if(ageB > ageA or (ageB > 100 and ageA < 100) or (ageB <= (0.5 * ageA + 7))):
                     continue
-                requests += counter[ageA] * counter[ageB]
-                if(ageB == ageA):
-                    requests -= counter[ageA]
-                    
-        return requests
+                else:
+                    result += counter[ageA] * counter[ageB]
+                    if(ageA == ageB):
+                        result -= counter[ageA]
+        return result
