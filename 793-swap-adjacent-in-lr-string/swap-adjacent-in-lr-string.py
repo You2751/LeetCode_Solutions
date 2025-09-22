@@ -1,16 +1,22 @@
 class Solution:
-    def canTransform(self, start: str, result: str) -> bool:
-        if(start.replace('X', '') != result.replace('X', '')):
-            return False
-        start_idxs_L = [idx for idx, val in enumerate(start) if val == 'L']
-        start_idxs_R = [idx for idx, val in enumerate(start) if val == 'R']
-        result_idxs_L = [idx for idx, val in enumerate(result) if val == 'L']
-        result_idxs_R = [idx for idx, val in enumerate(result) if val == 'R']       
-        
-        for l in range(len(start_idxs_L)):
-            if(start_idxs_L[l] < result_idxs_L[l]):
+    def canTransform(self, start: str, end: str) -> bool:
+        n = len(start)
+        ptr1 = ptr2 = 0
+        while(True):
+            while(ptr1 < n and start[ptr1] == 'X'):
+                ptr1 += 1
+            while(ptr2 < n and end[ptr2] == 'X'):
+                ptr2 += 1
+            
+            if(ptr1 >= n and ptr2 >= n):
+                return True
+            if(ptr1 >= n or ptr2 >= n or start[ptr1] != end[ptr2]):
                 return False
-        for r in range(len(start_idxs_R)):
-            if(start_idxs_R[r] > result_idxs_R[r]):
+            
+            if(start[ptr1] == 'L' and end[ptr2] == 'L' and ptr1 < ptr2):
                 return False
-        return True
+
+            if(start[ptr1] == 'R' and end[ptr2] == 'R' and ptr1 > ptr2):
+                return False
+            ptr1 += 1
+            ptr2 += 1
