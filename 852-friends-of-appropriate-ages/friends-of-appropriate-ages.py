@@ -4,7 +4,7 @@ class Solution:
         counter = Counter(ages)
         for ageA in counter:
             for ageB in counter:
-                if(ageB > ageA or (ageB > 100 and ageA < 100) or (ageB <= (0.5 * ageA + 7))):
+                if(ageB <= 0.5 * ageA + 7 or ageB > ageA or (ageB > 100 and ageA < 100)):
                     continue
                 else:
                     result += counter[ageA] * counter[ageB]
