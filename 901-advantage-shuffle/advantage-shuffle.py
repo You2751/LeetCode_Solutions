@@ -2,11 +2,11 @@ class Solution:
     def advantageCount(self, nums1: List[int], nums2: List[int]) -> List[int]:
         nums1.sort()
         nums2_with_idx = [[num, idx] for idx, num in enumerate(nums2)]
-        result = [0] * len(nums2_with_idx)
         nums2_with_idx.sort()
-        left, right = 0, len(nums1) - 1
+        result = [0] * len(nums2_with_idx)
+        left, right = 0, len(nums2_with_idx) - 1
         for num in nums1:
-            if(nums2_with_idx[left][0] < num):
+            if(num > nums2_with_idx[left][0]):
                 result[nums2_with_idx[left][1]] = num
                 left += 1
             else:
