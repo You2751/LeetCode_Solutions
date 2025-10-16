@@ -7,7 +7,7 @@ class Solution:
             counter = Counter(nums2)
             for num in nums1:
                 target = num ** 2
-                left, right = 0, len(nums2) - 1
+                left, right = 0 , len(nums2) - 1
                 while(left < right):
                     check_val = nums2[left] * nums2[right]
                     if(check_val > target):
@@ -23,9 +23,9 @@ class Solution:
                             result += counter[nums2[left]] * counter[nums2[right]]
                             check_left = nums2[left]
                             check_right = nums2[right]
-                        while(left <right and nums2[left] == check_left):
+                        while(left < right and nums2[left] == check_left):
                             left += 1
                         while(left < right and nums2[right] == check_right):
                             right -= 1
             return result
-        return check(nums1, nums2) + check(nums2, nums1)
+        return check(nums1, nums2) + check(nums2, nums1) 
