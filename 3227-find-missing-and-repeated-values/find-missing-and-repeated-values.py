@@ -11,5 +11,5 @@ class Solution:
             if(nums[idx] > 0):
                 nums[idx] = -nums[idx]
             else:
-                result.append(idx + 1)
+                result.append(abs(num))
         return result + [i + 1 for i, num in enumerate(nums) if num > 0]
