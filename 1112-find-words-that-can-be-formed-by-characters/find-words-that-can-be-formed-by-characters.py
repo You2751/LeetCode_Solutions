@@ -5,6 +5,6 @@ class Solution:
         for word in words:
             n = len(word)
             counter_word = Counter(word)
-            if(all(counter_word[c] <= counter[c] for c in counter_word.keys())):
+            if(not(counter_word - counter)):
                 result += n
         return result
