@@ -1,19 +1,16 @@
 class Solution:
-    def findAnagrams(self, s: str, p: str) -> List[int]:
-        if(len(p) > len(s)):
-            return []
-    
+    def findAnagrams(self, s: str, p: str) -> list[int]:
         result = []
-        window = len(p)
-        counter = Counter(p)
-        counter_check = Counter(s[:window])
-        if(counter == counter_check):
+        n = len(p)
+        counter_p = Counter(p)
+        dic = Counter(s[:n])
+        if(not (counter_p - dic)):
             result.append(0)
-        for right in range(1, len(s) - window + 1):
-            counter_check[s[right - 1]] -= 1
-            counter_check[s[right + window - 1]] += 1
-            if(counter_check[s[right - 1]] == 0):
-                del counter_check[s[right - 1]]
-            if(counter == counter_check):
-                result.append(right)
+        for i in range(n, len(s)):
+            dic[s[i]] += 1
+            dic[s[i - n]] -= 1
+            if(dic[s[i - n]] == 0):
+                del dic[s[i - n]]
+            if(not(counter_p - dic)):
+                result.append(i - n + 1)
         return result
